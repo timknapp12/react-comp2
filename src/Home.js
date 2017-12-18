@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import List from './List';
+import axios from 'axios';
 
 export default class Home extends Component {
     // constructor 36I
@@ -9,10 +10,10 @@ export default class Home extends Component {
         // state 36C
         this.state = {
             toDo: '',
-            list: ['update resume', 'host personal project']
+            list: ['update resume', 'host personal project'],
+            character: {}
         }
     this.handleChange = this.handleChange.bind(this);
-
     }
 
     handleChange(event) {
@@ -29,8 +30,20 @@ export default class Home extends Component {
         console.log(`show '${this.state.toDo}' list item`);
     }
 
+    // componentDidMount 44E
+    componentDidMount = () => {
+        // axios 44C
+        // promise 44D
+      axios.get('https://swapi.co/api/people/2').then(res => {
+        this.setState({
+            character: res.data
+        })
+      }) 
+    }
+
     // render 36F
     render() {
+        console.log(this.state.character);
         return(
             // 36G JSX
             <div>
@@ -45,6 +58,9 @@ export default class Home extends Component {
             list={this.state.list}
             // handleClick={this.displayList}
             />
+            <h1>Character</h1>
+            <h1>name: {this.state.character.name}</h1>
+            <h1>gender: {this.state.character.gender}</h1>
             </div> 
         )
     }
