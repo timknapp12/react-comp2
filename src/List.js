@@ -1,5 +1,6 @@
 import React from 'react';
 
+// receive props 36E
 export default function List(props) {
 
 
